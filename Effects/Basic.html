@@ -13,19 +13,55 @@
   </head>
   <body>
     <h1>Basic Effects</h1>
-    <br />
-    I Expand Once
-    <div id="div1"></div>
-    <br />
-    <p id="p1">Click ME!</p>
-    <p id="p2">Stop Thats Enough!</p>
-    <div id="div2" class="clipped"></div>
-    <br />
-    <button id="hidebtn">hide the div</button>
-    <button id="showbtn">show the div</button>
-    <br />
-    <div id="div3" style="margin-top: 10px"></div>
-    <br />
+    <div class="container">
+      <section>
+        I Expand Once
+        <div id="div1"></div>
+      </section>
+
+      <section>
+        <p id="p1">Click ME!</p>
+        <p id="p2">Stop Thats Enough!</p>
+        <div id="div2" class="clipped"></div>
+      </section>
+      <section>
+        <div class="divcontainer">
+          <button id="hidebtn">hide the div</button>
+          <button id="showbtn">show the div</button>
+        </div>
+        <div id="div3" style="margin-top: 10px"></div>
+      </section>
+
+      <section>
+        <div class="toggle1">I Scale</div>
+
+        <div class="toggle2">I Slide</div>
+      </section>
+
+      <section>
+        <div class="dragdrop" id="draggable">Drag me</div>
+
+        <div class="dragdrop" id="droppable">Drop here</div>
+      </section>
+
+      <section>
+        <h3 draggable="false">Drag and Sort Me</h3>
+        <ul id="sortable">
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+          <li>Item 5</li>
+        </ul>
+      </section>
+    </div>
+    <div class="container2">
+      <section>
+        <div id="elem">color animations</div>
+        <button id="toggle">animate colors</button>
+      </section>
+    </div>
+
     <script>
       $("#div1").click(function () {
         $(this).addClass("big-blue", 1000, "easeOutBounce");
@@ -82,6 +118,44 @@
         $("#div3").show("drop", { direction: "down" }, "slow");
       });
     </script>
-    
+    <script>
+      $(document).click(function () {
+        $(".toggle1").toggle("scale");
+      });
+    </script>
+    <script>
+      $(document).click(function () {
+        $(".toggle2").toggle("slide");
+      });
+    </script>
+    <script>
+      $("#draggable").draggable({
+        zIndex: 100,
+        snapTolerance: 30,
+        snapMode: "inner",
+        scrollSpeed: 100,
+        scrollSensitivity: 100,
+        grid: [50, 20],
+        distance: 10,
+        cursor: "crosshair",
+        containment: "parent",
+      });
+      $("#droppable").droppable({
+        drop: function () {
+          alert("dropped");
+        },
+      });
+    </script>
+    <script>
+      $("#sortable").sortable();
+    </script>
+    <script>
+      $("#toggle").click(function () {
+        $("#elem").animate({
+          color: "green",
+          backgroundColor: "rgb( 20, 20, 20 )",
+        });
+      });
+    </script>
   </body>
 </html>

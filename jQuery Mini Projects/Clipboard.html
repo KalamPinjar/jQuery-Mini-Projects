@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clipboard</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        background-image: linear-gradient(#ffffff 2px, transparent 2px),
+          linear-gradient(to right, #ffffff 2px, transparent 2px);
+        background-size: 32px 32px;
+        background-color: #f6f6f6;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 30vw;
+        height: 80vh;
+        gap: 0.825rem;
+        border-radius: 0.825rem;
+        padding: 10px;
+        box-shadow: 0 0 10px black;
+
+        text-align: center;
+
+        margin-top: 40px;
+
+        font-size: 2rem;
+      }
+      .container h1 {
+        font-size: 2.5rem;
+        margin-bottom: 15%;
+
+        font-weight: 900;
+
+        color: rgb(0, 11, 75);
+
+        text-shadow: 0 0 2px rgb(0, 0, 0);
+
+        letter-spacing: 1px;
+
+        text-transform: uppercase;
+
+        text-decoration: underline;
+
+        text-align: center;
+      }
+
+      textarea {
+        background: rgb(238, 237, 237);
+        background-image: url("images/textareaPng.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        border: none;
+        outline: none;
+        box-shadow: inset 0 0 5px black;
+        padding: 5px;
+        width: 80%;
+        height: 70%;
+      }
+      span {
+        display: none;
+      }
+      span.copied {
+        display: block;
+        color: rgb(0, 110, 255);
+        position: absolute;
+        opacity: 0.3;
+        font-weight: 800;
+        bottom: 1rem;
+        transition: all 0.5s ease;
+      }
+      #copybtn {
+        position: relative;
+        right: 7.25rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+        padding: 5px 15px;
+        border-radius: 0.55rem;
+        border: none;
+        background-color: rgb(0, 110, 255);
+        font-weight: 500;
+        cursor: pointer;
+        margin-bottom: 15%;
+
+        box-shadow: 0 0 3px 2px #0e0e0e;
+
+        transition: all 0.3s ease;
+
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+
+        &:hover {
+          background-color: #030303;
+          transform: scale(1.1);
+          color: #ffffff;
+        }
+
+        &:active {
+          transform: scale(0.9);
+        }
+      }
+
+      span.bonce {
+        animation: bonce-animation 3s ease-in-out infinite;
+      }
+
+      @keyframes bonce-animation {
+        to{
+          opacity: 0.6;
+          transform: scale(1.1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Clipboard</h1>
+      <textarea name="clipboard" id="textarea" cols="30" rows="10">
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus quasi obcaecati voluptatum cupiditate adipisci dolorum incidunt iste repudiandae ipsum facere praesentium reprehenderit, voluptatibus laborum, distinctio officiis provident, voluptatem facilis consequuntur!</textarea
+      >
+      <button id="copybtn">Copy <i class="fa-copy fa-regular"></i></button>
+      <span>COPIED!</span>
+    </div>
+    <script>
+      $(document).ready(function () {
+        function add() {
+          $("span").addClass("bonce");
+          $("span").addClass("copied");
+        }
+        function remove() {
+          $("span").removeClass("bonce");
+          $("span").removeClass("copied");
+        }
+        $("#copybtn").click(function () {
+          $("#textarea").select();
+          document.execCommand("copy");
+          add();
+          setTimeout(remove, 2000);
+        });
+      });
+    </script>
+  </body>
+</html>

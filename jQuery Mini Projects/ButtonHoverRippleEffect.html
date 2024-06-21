@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Button Hover Ripple Effect</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #090a0b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        height: 100vh;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .btn {
+        display: inline-block;
+        position: relative;
+        padding: 18px 50px;
+        color: #000000;
+        background-color: #ffffff;
+        border-radius: 1px;
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: capitalize;
+        text-decoration: none;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      /* .btn:hover {
+        color: #ffffff;
+        background: #000000;
+      } */
+
+      .btn span {
+        display: block;
+        width: 0px;
+        height: 0px;
+        background: rgb(11, 66, 241);
+        background: radial-gradient(
+          circle,
+          rgba(11, 66, 241, 1) 0%,
+          rgba(43, 9, 121, 1) 34%,
+          rgba(0, 212, 255, 1) 98%
+        );
+        /* background: linear-gradient(270deg, #8a39fb, #2256f9, #22c8f9); */
+        background-size: 400% 400%;
+
+        -webkit-animation: gradient-span 15s ease infinite;
+        -moz-animation: gradient-span 15s ease infinite;
+        animation: gradient-span 15s ease infinite;
+        position: absolute;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.6s ease 0s, height 0.6s ease 0s;
+        z-index: -1;
+      }
+
+      @-webkit-keyframes gradient-span {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      @-moz-keyframes gradient-span {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      @keyframes gradient-span {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .btn:hover span {
+        width: 400px;
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#" class="btn">
+      Hover Me
+      <span></span>
+    </a>
+
+    <script>
+      $(document).ready(function () {
+        $(".btn")
+          .on("mouseenter", function (e) {
+            var parentOffset = $(this).offset();
+            x = e.pageX - parentOffset.left;
+            y = e.pageY - parentOffset.top;
+            $(this).find("span").css({
+              top: y,
+              left: x,
+            });
+          })
+          .on("mouseout", function (e) {
+            var parentOffset = $(this).offset();
+            x = e.pageX - parentOffset.left;
+            y = e.pageY - parentOffset.top;
+            $(this).find("span").css({
+              top: y,
+              left: x,
+            });
+          });
+      });
+    </script>
+  </body>
+</html>

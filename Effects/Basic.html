@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Basic Effects</title>
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"
+    />
+    <link rel="stylesheet" href="../main.css" />
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  </head>
+  <body>
+    <h1>Basic Effects</h1>
+    <br />
+    I Expand Once
+    <div id="div1"></div>
+    <br />
+    <p id="p1">Click ME!</p>
+    <p id="p2">Stop Thats Enough!</p>
+    <div id="div2" class="clipped"></div>
+    <br />
+    <button id="hidebtn">hide the div</button>
+    <button id="showbtn">show the div</button>
+    <br />
+    <div id="div3" style="margin-top: 10px"></div>
+    <br />
+    <script>
+      $("#div1").click(function () {
+        $(this).addClass("big-blue", 1000, "easeOutBounce");
+      });
+    </script>
+    <script>
+      var clippings = [
+        {
+          top: 50,
+          right: 50,
+          bottom: 50,
+          left: 50,
+        },
+        {
+          top: 0,
+          right: 150,
+          bottom: 150,
+          left: 0,
+        },
+      ];
+      var index = 1;
+      var box = $(".clipped").cssClip(clippings[0]);
+      $("#p2").addClass("displayNone");
+      let clicked = true;
+      let clickedCount = 0;
+      $(document).click(() => {
+        if (clicked && clickedCount >= 3) {
+          $("#p2").removeClass("displayNone");
+          $("#p2").show("drop", { direction: "down" }, "slow");
+          clicked = false;
+        }
+      });
+
+      if (clicked) {
+        $(document).click(() => {
+          if (clickedCount < 3) {
+            clickedCount++;
+            box.animate(
+              {
+                clip: clippings[index++ % 2],
+              },
+              2000
+            );
+            $("#p1").text("Oooh, I'm clicked!");
+          }
+        });
+      }
+    </script>
+    <script>
+      $("#hidebtn").click(function () {
+        $("#div3").hide("drop", { direction: "down" }, "slow");
+      });
+      $("#showbtn").click(function () {
+        $("#div3").show("drop", { direction: "down" }, "slow");
+      });
+    </script>
+    
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>TooltipUI</title>
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"
+    />
+    <link rel="stylesheet" href="../main.css" />
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  </head>
+  <body>
+    <p>
+      <a href="#" title="Anchor description">Anchor text</a>
+      <input title="Input help" />
+    </p>
+    <script>
+      $(document).tooltip({
+        tooltipClass: "mytooltip",
+      });
+    </script>
+  </body>
+</html>
